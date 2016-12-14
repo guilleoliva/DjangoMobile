@@ -1,0 +1,14 @@
+<ion-view title="Oradores" id="page4">
+  <ion-content padding="true" class="has-header">
+  <ion-refresher
+    pulling-text="Pull to refresh..."
+    on-refresh="ctrl.actualizar()">
+  </ion-refresher>
+    <ion-list id="oradores-list5">
+      <ion-item class="item-avatar" id="oradores-list-item11" ng-repeat="orador in ctrl.oradores" ui-sref="orador({ id: orador.id })">
+      	<img ng-src="{{ orador.foto }}">
+        <h2>{{ orador.nombre }}</h2>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,17 @@
+<ion-view title="Orador" id="page6">
+  <ion-content padding="true" class="has-header">
+    <div style="margin: 0px; text-align: center;">
+      <img width="100%" ng-src="{{ ctrl.orador.foto }}" />
+    </div>
+    <h2 id="orador-heading4" style="color:#000000;">{{ ctrl.orador.nombre }}</h2>
+    <div id="orador-markdown4" class="show-list-numbers-and-dots">
+      <p style="color:#000000;">{{ ctrl.orador.bio }}</p>
+    </div>
+    <h3>Charlas en la conferencia</h3>
+    <ion-list id="orador-list7">
+      <ion-item class="item-icon-left" id="orador-list-item13" ng-repeat="charla in ctrl.charlas" ui-sref="charla({ id: charla.id })">
+        <i class="icon ion-speakerphone"></i>{{ charla.titulo }}</ion-item>
+    </ion-list>
+    <div class="spacer" style="width: 300px; height: 50px;"></div>
+  </ion-content>
+</ion-view>

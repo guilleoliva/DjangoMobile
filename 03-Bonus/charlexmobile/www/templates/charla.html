@@ -1,0 +1,31 @@
+<ion-view title="Charla" id="page5">
+  <ion-content padding="true" class="has-header">
+    <div style="margin: 0px; text-align: center;">
+      <img width="100%" ng-src="{{ ctrl.charla.orador.foto }}" />
+    </div>
+    <h2 id="charla-heading1" style="color:#000000;">{{ ctrl.charla.titulo }}</h2>
+    <h4 id="charla-heading2" style="color:#000000;">{{ ctrl.charla.orador.nombre }}</h4>
+    <div class="row">
+      <div class="col-10 text-center"><i class="icon ion-location"></i></div><div class="col-90"><p>{{ ctrl.charla.lugar.nombre }}</p></div>
+    </div>
+    <div class="row">
+      <div class="col-10 text-center"><i class="icon ion-calendar"></i></div><div class="col-90"><p>{{ ctrl.charla.hora | date : 'dd/MM/yyyy - HH:mm' }}</p></div>
+    </div>
+    <div id="charla-markdown3" class="show-list-numbers-and-dots">
+      <p>{{ ctrl.charla.descripcion }}</p>
+    </div>
+    <button id="charla-button1" class="button button-calm  button-block" ng-show="!ctrl.usuarioVa" ng-click="ctrl.registrar()">¡Voy!</button>
+    <form id="charla-form3" class="list" ng-show="ctrl.usuarioVa">
+      <label class="item item-select" id="charla-select1" name="rating">
+        <span class="input-label">¿Que te pareció?</span>
+        <select ng-options="item as item.label for item in ctrl.ratingOpciones track by item.id" ng-change="ctrl.registrar()" ng-model="ctrl.rating">
+        </select>
+      </label>
+    </form>
+    <h4 id="charla-heading5" style="color:#000000;">Fotos de la charla</h4>
+    <div style="margin: 0px; text-align: center;" ng-repeat="foto in ctrl.fotos">
+      <img width="100%" ng-src="{{ foto.foto }}" />
+    </div>
+    <button id="charla-button5" class="button button-dark  button-block icon-left ion-android-camera" ng-click="ctrl.sacarFoto()" ng-show="ctrl.usuarioVa">Sacar una foto</button>
+  </ion-content>
+</ion-view>
