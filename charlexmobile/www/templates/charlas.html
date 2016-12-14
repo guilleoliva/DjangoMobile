@@ -1,0 +1,24 @@
+<ion-view title="Charlas" id="page2">
+  <ion-nav-buttons side="right" class="has-header">
+    <button class="button icon ion-log-out" ng-click="ctrl.logout()"></button>
+  </ion-nav-buttons>
+  <ion-content padding="true" class="has-header">
+    <ion-refresher
+      pulling-text="Pull to refresh..."
+      on-refresh="ctrl.actualizar()">
+    </ion-refresher>
+    <ion-list id="charlas-list2">
+      <ion-item class="item-thumbnail-left" id="charlas-list-item9" ng-repeat="charla in ctrl.charlas" ui-sref="charla({ id: charla.id })">
+      	<img ng-src="{{ charla.orador.foto }}">
+        <h2>{{ charla.titulo }}</h2>
+        <p>{{ charla.orador.nombre }}</p>
+        <div class="row">
+        	<div class="col-10 text-center"><i class="icon ion-location"></i></div><div class="col-90"><p>{{ charla.lugar.nombre }}</p></div>
+        </div>
+        <div class="row">
+        	<div class="col-10 text-center"><i class="icon ion-calendar"></i></div><div class="col-90"><p>{{ charla.hora | date : 'dd/MM/yyyy - HH:mm' }}</p></div>
+        </div>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
