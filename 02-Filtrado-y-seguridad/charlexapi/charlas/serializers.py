@@ -1,5 +1,4 @@
 from django.contrib.auth import get_user_model
-from drf_extra_fields.fields import Base64ImageField
 from rest_framework import serializers
 from charlas.models import (
     Orador,
@@ -94,8 +93,6 @@ class FotoCharlaSerializer(serializers.HyperlinkedModelSerializer):
         model = FotoCharla
         fields = '__all__'
         filter_fields = ('charla',)
-
-    foto = Base64ImageField()
 
     def save(self, *args, **kwargs):
         request = self.context.get('request', None)

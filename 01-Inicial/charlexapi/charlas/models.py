@@ -67,8 +67,14 @@ class UsuarioCharla(models.Model):
     class Meta:
         unique_together = ('usuario', 'charla')
 
+    def __str__(self):
+        return "%s va a '%s'" % (self.usuario.username, self.charla.titulo)
+
 
 class FotoCharla(models.Model):
     foto = models.ImageField(upload_to='fotoscharla')
     usuario = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL)
     charla = models.ForeignKey(Charla, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return "Sacada por %s en '%s'" % (self.usuario.username, self.charla.titulo)

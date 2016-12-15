@@ -22,27 +22,27 @@ function($resourceProvider, $httpProvider) {
 }])
 
 .factory('Usuario', ['$resource', function($resource){
-    return $resource('http://localhost:8000/api/usuario/:id/');
+    return $resource('http://192.168.1.5:8000/api/usuario/:id/');
 }])
 
 .factory('Token', ['$resource', function($resource){
-    return $resource('http://localhost:8000/api-token-auth/');
+    return $resource('http://192.168.1.5:8000/api-token-auth/');
 }])
 
 .factory('Charla', ['$resource', function($resource){
-    return $resource('http://localhost:8000/api/charla/:id/');
+    return $resource('http://192.168.1.5:8000/api/charla/:id/');
 }])
 
 .factory('Orador', ['$resource', function($resource){
-    return $resource('http://localhost:8000/api/orador/:id/');
+    return $resource('http://192.168.1.5:8000/api/orador/:id/');
 }])
 
 .factory('UsuarioCharla', ['$resource', function($resource){
-    return $resource('http://localhost:8000/api/usuariocharla/:id/');
+    return $resource('http://192.168.1.5:8000/api/usuariocharla/:id/');
 }])
 
 .factory('FotoCharla', ['$resource', function($resource){
-    return $resource('http://localhost:8000/api/fotocharla/:id/');
+    return $resource('http://192.168.1.5:8000/api/fotocharla/:id/');
 }])
 
 .service('Sesion', [function(){
