@@ -3,6 +3,9 @@ from django.conf import settings
 
 
 class Orador(models.Model):
+    """
+    La persona que presenta una charla
+    """
 
     class Meta:
         verbose_name = "orador"
@@ -17,6 +20,9 @@ class Orador(models.Model):
 
 
 class Lugar(models.Model):
+    """
+    Cada lugar donde se puede llevar a cabo una charla
+    """
 
     class Meta:
         verbose_name = "lugar"
@@ -29,6 +35,10 @@ class Lugar(models.Model):
 
 
 class Charla(models.Model):
+    """
+    La charla propiamente dicha
+    Notar los foreign key a orador y lugar
+    """
 
     class Meta:
         verbose_name = "charla"
@@ -60,6 +70,12 @@ class Charla(models.Model):
 
 
 class UsuarioCharla(models.Model):
+    """
+    En este modelo se guarda la asistencia y opinión de un usuario sobre
+    una charla.
+    Notar que los campos usuario y charla son únicos juntos. Quiere decir
+    que un usuario solo puede asistir (y opinar) una vez a cada charla.
+    """
     usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     charla = models.ForeignKey(Charla, on_delete=models.CASCADE)
     rating = models.IntegerField(verbose_name='rating', null=True)
@@ -72,6 +88,9 @@ class UsuarioCharla(models.Model):
 
 
 class FotoCharla(models.Model):
+    """
+    Esto es parte del bonus. Mirar la serie 03.
+    """
     foto = models.ImageField(upload_to='fotoscharla')
     usuario = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL)
     charla = models.ForeignKey(Charla, on_delete=models.CASCADE)
