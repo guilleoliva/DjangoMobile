@@ -12,6 +12,12 @@ User = get_user_model()
 
 
 class UsuarioSerializer(serializers.HyperlinkedModelSerializer):
+    """
+    Serializer para interactuar con el modelo User de django.contrib.auth
+    Lo único que tocamos acá es el método save para hashear el pass antes
+    de guardar el objeto. Ojo: siempre que el cliente mande password o info
+    sensible, el canal tiene que estar encriptado con SSL.
+    """
     class Meta:
         model = User
         fields = ('username', 'password', 'first_name', 'url', 'id')
@@ -36,6 +42,15 @@ class LugarSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class CharlaSerializer(serializers.HyperlinkedModelSerializer):
+    """
+    Este serializer usa serializers anidados para Orador y Lugar
+    notar que se definen como un campo común, pero en lugar de
+    un tipo de campo como serializers.IntegerField, usamos directamente
+    un serializer.
+    Con esto logramos que ya venga la información del Orador y del Lugar
+    incluido en el response, entonces en lugar de tener solo el link al
+    orador, ahora tenemos su nombre, bio, foto, etc. Lo mismo con el lugar.
+    """
     class Meta:
         model = Charla
         fields = (
@@ -55,6 +70,13 @@ class CharlaSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class UsuarioCharlaSerializer(serializers.HyperlinkedModelSerializer):
+    """
+    Este serializer registra la asistencia y opinión de un usuario sobre una charla
+    Pisamos el método save para asegurarnos de algunas cosas:
+    1. Que el usuario que guardamos siempre sea el usuario que hizo un request (un
+    usuario mal intencionado podría tratar de registrar la asistencia de otro usuario
+    2. Registramos una sola vez por usuario la charla.
+    """
     class Meta:
         model = UsuarioCharla
         fields = '__all__'
@@ -73,6 +95,8 @@ class UsuarioCharlaSerializer(serializers.HyperlinkedModelSerializer):
         if request and request.user:
             # Siempre pisamos el usuario
             # con el usuario registrado
+            # Con esto nos aseguramos de que un usuario no pueda
+            # votar en nombre de otro
             self.validated_data['usuario'] = request.user
 
         # Tratamos de traer una instancia existente
